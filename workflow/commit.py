@@ -12,8 +12,21 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-def main():
-    print("Hello git workflow commit")
+import Workflow as wf
+
+def commitToIssue():
+    issueName = findIssueName()
+    wf.commitToIssue(issueName)
+
+def findIssueName():
+    r = wf.findRepo()
+    branchName = r.head.reference.name
+
+    #if starts with issue marker
+    if branchName.startswith(wf.prefix()):
+        return branchName.split('/')[1]
+    else:
+        raise Exception("Not an issue branch")
 
 if __name__ == "__main__":
-    main()
+    commitToIssue()

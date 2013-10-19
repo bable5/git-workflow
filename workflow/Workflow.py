@@ -39,7 +39,24 @@ def startIssue(issueName, root, desc=None):
 
     print("Checkout: " + branchName)
 
-    repo.git.checkout(root, b=branchName)
+    repo.git.branch(branchName, root)
+    repo.git.checkout(branchName)
+
+def commitToIssue(issueName):
+    """ Create a commit for an issue. Automatically appends the correct
+    marker for the issue tracker.
+    """
+    repo = findRepo()
+
+    issueMarker = formatIssueMarker(issueName)
+    print issueMarker
+
+    #Create an initial commit.
+    repo.git.commit("-m", issueMarker)
+
+def formatIssueMarker(issueName) :
+    """ Create a marker which will link the commit to the issue tracker."""
+    return '[#' + str(issueName) + ']'
 
 def deleteIssue(issueName, desc=None, defaultBranch='master'):
     """ Delete an issue branch
