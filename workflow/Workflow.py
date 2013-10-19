@@ -13,12 +13,13 @@
 #   limitations under the License.
 
 from git import *
+import os.path
 
 def prefix():
     # TODO: Extract to common class if other workflow providers installed
     return "issue/"
 
-def __findRepo():
+def findRepo():
     return Repo(".")
 
 def createBranchName(issueName, desc):
@@ -33,7 +34,7 @@ def startIssue(issueName, root, desc=None):
     """ Start a new issue branch """
     print issueName, root, desc
 
-    repo = __findRepo()
+    repo = findRepo()
     branchName = createBranchName(issueName, desc)
 
     print("Checkout: " + branchName)
@@ -47,7 +48,7 @@ def deleteIssue(issueName, desc=None, defaultBranch='master'):
     @param defaultBranch -- branch the git repo will be on when the issue branch is deleted. Defaults to master
     """
 
-    repo = __findRepo()
+    repo = findRepo()
     branchName = createBranchName(issueName, desc)
     print ("Checking out " + str(defaultBranch))
     repo.git.checkout(defaultBranch)
