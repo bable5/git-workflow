@@ -20,7 +20,7 @@ def prefix():
     return "issue/"
 
 def findRepo():
-    return Repo(".")
+    return Repo(os.getcwd())
 
 def createBranchName(issueName, desc):
     branchName = prefix() + str(issueName)
