@@ -1,5 +1,0 @@
-#! /usr/bin/env sh
-
-WORKFLOW_HOME=$( cd $( dirname "$0") && pwd)
-
-python "$WORKFLOW_HOME/workflow/commit.py" $@
