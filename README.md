@@ -1,12 +1,12 @@
-git-workflow 
+git-workflow
 ============
 
-Automate interaction with an issue tracker/planning 
+Automate interaction with an issue tracker/planner
 
-Current supports Jira, but is designed to be general enough to support an issue
-tracker which integrates with git commits.
+Current supports Jira with beanstalk, but is designed to be general enough to support other issue
+tracker/repository host combinations.
 
-Description 
+Description
 ====
 
 <code>git-workflow</code> is similar to the 
@@ -17,7 +17,7 @@ issue tracker such as Jira.  <code>git-workflow</code> automates creating issue
 to get <code>git</code> repos and issues trackers linked.
 
 
-Commands 
+Commands
 ======
 
 *     $> git workflow start -i &lt;issue-identifier</it>&gt;
