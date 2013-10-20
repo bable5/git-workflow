@@ -23,8 +23,6 @@ main() {
         usage
         exit 1
     fi
-    
-    echo "$@"
 
     SUBCOMMAND="$1"; shift
 
