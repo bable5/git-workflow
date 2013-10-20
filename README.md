@@ -20,7 +20,7 @@ to get <code>git</code> repos and issues trackers linked.
 Commands 
 ======
 
-*     $> git workflow start &lt;issue-identifier</it>&gt;
+*     $> git workflow start -i &lt;issue-identifier</it>&gt;
 *     $> git workflow commit
 *     $> git workflow finish
 
