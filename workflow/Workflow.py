@@ -22,6 +22,20 @@ def prefix():
 def findRepo():
     return Repo(os.getcwd())
 
+def findIssueName():
+    """Infer the name of the issue being worked on from the
+    name of the current branch. e.g if HEAD is issue/65/foobar, then
+    the issue name is 65.
+    """
+    r = findRepo()
+    branchName = r.head.reference.name
+
+    #if starts with issue marker
+    if branchName.startswith(prefix()):
+        return branchName.split('/')[1]
+    else:
+        raise Exception("Not an issue branch")
+
 def createBranchName(issueName, desc):
     branchName = prefix() + str(issueName)
     if (desc != None):
@@ -42,21 +56,28 @@ def startIssue(issueName, root, desc=None):
     repo.git.branch(branchName, root)
     repo.git.checkout(branchName)
 
-def commitToIssue(issueName):
+def commitToIssue(issueName, tag=None):
     """ Create a commit for an issue. Automatically appends the correct
     marker for the issue tracker.
     """
     repo = findRepo()
 
-    issueMarker = formatIssueMarker(issueName)
-    print issueMarker
+    issueMarker = formatIssueMarker(issueName, tag)
 
     #Create an initial commit.
     repo.git.commit("-m", issueMarker)
 
-def formatIssueMarker(issueName) :
+def finishIssue(issueName) :
+    commitToIssue(issueName, tag="state:resolved")
+
+def formatIssueMarker(issueName, tag=None) :
     """ Create a marker which will link the commit to the issue tracker."""
-    return '[#' + str(issueName) + ']'
+    marker = '[#' + str(issueName)
+
+    if tag is not None: 
+        marker = marker + " " + tag
+
+    return marker + ']'
 
 def deleteIssue(issueName, desc=None, defaultBranch='master'):
     """ Delete an issue branch

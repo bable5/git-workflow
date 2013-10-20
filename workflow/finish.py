@@ -12,8 +12,11 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-def main():
-    print("Hello git workflow finish")
+import Workflow as wf
+
+def finishIssue():
+    issueName = wf.findIssueName()
+    wf.finishIssue(issueName)
 
 if __name__ == "__main__":
-    main()
+    finishIssue()
